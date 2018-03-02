@@ -11,6 +11,9 @@ import (
 
 type Figure struct {
 	Name          string
+	Character     string
+	Category      string
+	Subcategory   string
 	Sculptor      string
 	OfficialPrice string
 	PreorderDate  string
@@ -20,10 +23,11 @@ type Figure struct {
 	Height        string
 	Weight        string
 	BoxSize       string
+	Observations  string
 }
 
 func main() {
-	excelFileName := "Guia-POP.xlsx"
+	excelFileName := "Libro1.xlsx"
 	xlFile, err := xlsx.OpenFile(excelFileName)
 	if err != nil {
 		log.Println("error opening excel", err)
@@ -40,25 +44,33 @@ func main() {
 				case 0:
 					figure.Name = cell.String()
 				case 1:
-					figure.Sculptor = cell.String()
+					figure.Character = cell.String()
 				case 2:
-					figure.OfficialPrice = cell.String()
+					figure.Category = cell.String()
 				case 3:
-					figure.PreorderDate = cell.String()
+					figure.Subcategory = cell.String()
 				case 4:
-					figure.ReleaseDate = cell.String()
+					figure.Sculptor = cell.String()
 				case 5:
-					figure.Reedition1 = cell.String()
+					figure.OfficialPrice = cell.String()
 				case 6:
-					figure.Reedition2 = cell.String()
+					figure.PreorderDate = cell.String()
 				case 7:
-					figure.Height = cell.String()
+					figure.ReleaseDate = cell.String()
 				case 8:
-					figure.Weight = cell.String()
+					figure.Reedition1 = cell.String()
 				case 9:
+					figure.Reedition2 = cell.String()
+				case 10:
+					figure.Height = cell.String()
+				case 11:
+					figure.Weight = cell.String()
+				case 12:
 					figure.BoxSize = cell.String()
+				case 13:
+					figure.Observations = cell.String()
 				default:
-					//fmt.Printf("Column [%d] not parsed. Value of column [%s]\n", i, cell.String())
+					fmt.Printf("Column [%d] not parsed. Value of column [%s]\n", i, cell.String())
 				}
 			}
 			figures = append(figures, figure)
@@ -78,6 +90,10 @@ title = "{{.Name}}"
 +++
 
 **Name:** {{.Name}}
+
+**Character:** {{.Character}}
+
+**Category:** {{.Category}} {{if .Subcategory}} {{.Subcategory}} {{end}}
 
 **Sculptor:** {{.Sculptor}}
 
@@ -100,6 +116,8 @@ title = "{{.Name}}"
 **Weight:** {{if .Weight}}{{.Weight}} (g){{end}}
 
 **Box size:** {{if .BoxSize}}{{.BoxSize}} (cm){{end}}{{end}}
+
+{{if .Observations}}**Bonus:** {{.Observations}}{{end}}
 `
 	t := template.Must(template.New("post").Parse(post))
 	for _, f := range figures {
@@ -109,13 +127,13 @@ title = "{{.Name}}"
 		}
 		file, err := os.Create(fmt.Sprintf("%s/generated/%s.md", dir, f.Name))
 		if err != nil {
-			log.Println("create file: ", err)
+			log.Println("Error creating file: ", err)
 			return
 		}
 
 		err = t.Execute(file, f)
 		if err != nil {
-			log.Print("execute: ", err)
+			log.Print("Error executing template: ", err)
 			return
 		}
 
