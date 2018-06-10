@@ -72,15 +72,14 @@ func generate() {
 			figures = append(figures, figure)
 		}
 	}
-	//fmt.Println("final figures\n", figures)
 
 	// Define a template.
 	post := `[[items]]
-title = "{{.Name}}"
-image = "/onepiece/images/{{.Character}}/{{.Name}} pop.jpg"
-thumb = "/onepiece/images/{{.Character}}/{{.Name}} pop thumb.jpg"
+title = "{{.Number}} - {{.Name}}"
+image = "/onepiecefigures/images/poster/{{.Number}}.jpg"
+thumb = "/onepiecefigures/images/poster/{{.Number}}.jpg"
 alt = "{{.Name}}"
-description = "<b>Name:</b> {{.Name}}<br><b>Character:</b> {{.Character}}<br><b>Category:</b> {{.Category}} {{if .Subcategory}}{{.Subcategory}}{{end}}<br><b>Sculptor:</b> {{.Sculptor}}<br><b>Official price:</b> {{if .OfficialPrice}}{{.OfficialPrice}} ¥{{end}}<br><b>Preorder date:</b> {{.PreorderDate}}<br><b>Release date:</b> {{.ReleaseDate}}{{if .Reedition1}}<br><b>Reeditions:</b> {{.Reedition1}}{{if .Reedition2}}, {{.Reedition2}}{{end}}<br><b>Height:</b> {{if .Height}}{{.Height}} (cm){{end}}<br><b>Weight:</b> {{if .Weight}}{{.Weight}} (g){{end}}<br><b>Box size:</b> {{if .BoxSize}}{{.BoxSize}} (cm){{end}}{{else}}<br><b>Height:</b> {{if .Height}}{{.Height}} (cm){{end}}<br><b>Weight:</b> {{if .Weight}}{{.Weight}} (g){{end}}<br><b>Box size:</b> {{if .BoxSize}}{{.BoxSize}} (cm){{end}}{{end}}{{if .Observations}}<br><b>Bonus:</b> {{.Observations}}{{end}}"
+description = "<b>Number:</b> {{.Number}}<br><b>Name:</b> {{.Name}}<br><b>Character:</b> {{.Character}}<br><b>Category:</b> {{.Category}} {{if .Subcategory}}{{.Subcategory}}{{end}}<br><b>Sculptor:</b> {{.Sculptor}}<br><b>Official price:</b> {{if .OfficialPrice}}{{.OfficialPrice}} ¥{{end}}<br><b>Preorder date:</b> {{.PreorderDate}}<br><b>Release date:</b> {{.ReleaseDate}}{{if .Reedition1}}<br><b>Reeditions:</b> {{.Reedition1}}{{if .Reedition2}}, {{.Reedition2}}{{end}}<br><b>Height:</b> {{if .Height}}{{.Height}} (cm){{end}}<br><b>Weight:</b> {{if .Weight}}{{.Weight}} (g){{end}}<br><b>Box size:</b> {{if .BoxSize}}{{.BoxSize}} (cm){{end}}{{else}}<br><b>Height:</b> {{if .Height}}{{.Height}} (cm){{end}}<br><b>Weight:</b> {{if .Weight}}{{.Weight}} (g){{end}}<br><b>Box size:</b> {{if .BoxSize}}{{.BoxSize}} (cm){{end}}{{end}}{{if .Observations}}<br><b>Bonus:</b> {{.Observations}}{{end}}"
 `
 	t := template.Must(template.New("post").Parse(post))
 	dir, err := os.Getwd()
@@ -91,7 +90,7 @@ description = "<b>Name:</b> {{.Name}}<br><b>Character:</b> {{.Character}}<br><b>
 		if f.Name == "" {
 			continue
 		}
-		file, err := os.Create(fmt.Sprintf("%s/toml/%s.toml", dir, f.Name))
+		file, err := os.Create(fmt.Sprintf("%s/toml/%s.toml", dir, f.Number))
 		if err != nil {
 			log.Println("Error creating file: ", err)
 			return
