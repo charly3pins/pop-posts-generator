@@ -10,6 +10,7 @@ import (
 )
 
 type Figure struct {
+	ID            int
 	Number        string
 	Name          string
 	Character     string
