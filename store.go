@@ -117,14 +117,25 @@ func read() {
 
 	// Define a template.
 	poster := `[[items]]
-title = "{{.Name}}"
+number = "{{.Number}}"
+name = "{{.Name}}"
+character = "{{.Character}}"
+category = "{{.Category}}"
+subcategory = "{{.Subcategory}}"
+sculptor = "{{.Sculptor}}"
+officialprice = "{{.OfficialPrice}} ¥"
+preorderdate = "{{.PreorderDate}}"
+releasedate = "{{.ReleaseDate}}"
+reedition1 = "{{.Reedition1}}"
+reedition2 = "{{.Reedition2}}"
+height = "{{.Height}} (cm)"
+weight = "{{.Weight}} (g)"
+boxsize = "{{.BoxSize}} (cm)"
+observations = "{{.Observations}}"
 image = "/onepiecefigures/images/poster/{{.Number}}.jpg"
 thumb = "/onepiecefigures/images/poster/{{.Number}}.jpg"
 alt = "{{.Name}}"
-description = "<b>Number:</b> {{.Number}}<br><b>Name:</b> {{.Name}}<br><b>Character:</b> {{.Character}}<br><b>Category:</b> {{.Category}} {{if .Subcategory}}{{.Subcategory}}{{end}}<br><b>Sculptor:</b> {{.Sculptor}}<br><b>Official price:</b> {{if .OfficialPrice}}{{.OfficialPrice}} ¥{{end}}<br><b>Preorder date:</b> {{.PreorderDate}}<br><b>Release date:</b> {{.ReleaseDate}}{{if .Reedition1}}<br><b>Reeditions:</b> {{.Reedition1}}{{if .Reedition2}}, {{.Reedition2}}{{end}}<br><b>Height:</b> {{if .Height}}{{.Height}} (cm){{end}}<br><b>Weight:</b> {{if .Weight}}{{.Weight}} (g){{end}}<br><b>Box size:</b> {{if .BoxSize}}{{.BoxSize}} (cm){{end}}{{else}}<br><b>Height:</b> {{if .Height}}{{.Height}} (cm){{end}}<br><b>Weight:</b> {{if .Weight}}{{.Weight}} (g){{end}}<br><b>Box size:</b> {{if .BoxSize}}{{.BoxSize}} (cm){{end}}{{end}}{{if .Observations}}<br><b>Bonus:</b> {{.Observations}}{{end}}"
 class = "{{if eq .Subcategory "Limited Lawson"}}limited-lawson{{else if eq .Category "Original Series"}}original-series{{else if eq .Category "Neo"}}neo{{else if eq .Category "Neo EX"}}neo-ex{{else if eq .Category "Neo DX"}}neo-dx{{else if eq .Category "CB"}}cb{{else if eq .Category "Mugiwara Theater"}}mugiwara-theater{{else if eq .Category "Strong Edition"}}strong-edition{{else if eq .Category "Stuffed Collection"}}stuffed-collection{{else if eq .Category "Strong Edition Limited Lawson"}}strong-edition-limited-lawson{{else if eq .Category "Limited Edition"}}limited-edition{{else if eq .Category "Sailing Again"}}sailing-again{{else if eq .Category "Maximum"}}maximum{{else if eq .Category "Edition Z"}}edition-z{{else if eq .Category "M.A.S"}}mas{{else if eq .Category "Kabuki Edition"}}kabuki-edition{{else if eq .Category "I.R.O"}}iro{{else if eq .Category "S.O.C"}}soc{{end}}"
-category = "{{.Category}}{{with .Subcategory}} {{.}}{{end}}"
-number = "{{.Number}}"
 `
 	t := template.Must(template.New("poster").Parse(poster))
 	dir, err := os.Getwd()
