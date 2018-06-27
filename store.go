@@ -242,7 +242,7 @@ class = "{{if eq .Subcategory "Limited Lawson"}}limited-lawson{{else if eq .Cate
 		if f.Name == "" {
 			continue
 		}
-		file, err := os.Create(fmt.Sprintf("%s/md/%s.md", dir, f.Name))
+		file, err := os.Create(fmt.Sprintf("%s/md/%s.md", dir, f.Number))
 		if err != nil {
 			log.Println("Error creating file: ", err)
 			return
