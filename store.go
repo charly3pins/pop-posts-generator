@@ -212,7 +212,6 @@ func readMarkdown() {
 
 	// Define a template.
 	poster := `+++
-title = "{{.Name}}"
 number = "{{.Number}}"
 name = "{{.Name}}"
 character = "{{.Character}}"
