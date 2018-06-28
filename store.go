@@ -212,6 +212,7 @@ func readMarkdown() {
 
 	// Define a template.
 	poster := `+++
+title = "{{.Name}}"
 number = "{{.Number}}"
 name = "{{.Name}}"
 character = "{{.Character}}"
@@ -231,7 +232,7 @@ image = "/onepiecefigures/images/poster/full/{{.Number}}.jpg"
 thumb = "/onepiecefigures/images/poster/thumb/{{.Number}}.jpg"
 alt = "{{.Name}}"
 class = "{{if eq .Subcategory "Limited Lawson"}}limited-lawson{{else if eq .Category "Original Series"}}original-series{{else if eq .Category "Neo"}}neo{{else if eq .Category "Neo EX"}}neo-ex{{else if eq .Category "Neo DX"}}neo-dx{{else if eq .Category "CB"}}cb{{else if eq .Category "Mugiwara Theater"}}mugiwara-theater{{else if eq .Category "Strong Edition"}}strong-edition{{else if eq .Category "Stuffed Collection"}}stuffed-collection{{else if eq .Category "Strong Edition Limited Lawson"}}strong-edition-limited-lawson{{else if eq .Category "Limited Edition"}}limited-edition{{else if eq .Category "Sailing Again"}}sailing-again{{else if eq .Category "Maximum"}}maximum{{else if eq .Category "Edition Z"}}edition-z{{else if eq .Category "M.A.S"}}mas{{else if eq .Category "Kabuki Edition"}}kabuki-edition{{else if eq .Category "I.R.O"}}iro{{else if eq .Category "S.O.C"}}soc{{end}}"
-tags = ["onepiece", "portrait of pirates", "{{.Sculptor}}", "{{.Character}}"]
+tags = ["onepiece", "portrait of pirates", {{if .Sculptor}}"{{.Sculptor}}",{{end}} "{{.Character}}"]
 +++
 **Name:** {{.Name}}
 
