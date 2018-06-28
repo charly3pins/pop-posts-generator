@@ -259,7 +259,8 @@ class = "{{if eq .Subcategory "Limited Lawson"}}limited-lawson{{else if eq .Cate
 
 **Box size:** {{if .BoxSize}}{{.BoxSize}} (cm){{end}}{{end}}
 {{if .Observations}}
-**Bonus:** {{.Observations}}{{end}}`
+**Bonus:** {{.Observations}}{{end}}
+<img src="/onepiecefigures/images/poster/thumb/{{.Number}}.jpg">`
 
 	t := template.Must(template.New("poster").Parse(poster))
 	dir, err := os.Getwd()
