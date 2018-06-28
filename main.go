@@ -118,8 +118,9 @@ title = "{{.Name}}"
 **Weight:** {{if .Weight}}{{.Weight}} (g){{end}}
 
 **Box size:** {{if .BoxSize}}{{.BoxSize}} (cm){{end}}{{end}}
+{{if .Observations}}
 
-{{if .Observations}}**Bonus:** {{.Observations}}{{end}}
+**Bonus:** {{.Observations}}{{end}}
 `
 	t := template.Must(template.New("post").Parse(post))
 	for _, f := range figures {
