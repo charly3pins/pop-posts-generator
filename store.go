@@ -252,16 +252,15 @@ class = "{{if eq .Subcategory "Limited Lawson"}}limited-lawson{{else if eq .Cate
 
 **Weight:** {{if .Weight}}{{.Weight}} (g){{end}}
 
-**Box size:** {{if .BoxSize}}{{.BoxSize}} (cm){{end}}
-
-{{else}}**Height:** {{if .Height}}{{.Height}} (cm){{end}}
+**Box size:** {{if .BoxSize}}{{.BoxSize}} (cm){{end}}{{else}}
+**Height:** {{if .Height}}{{.Height}} (cm){{end}}
 
 **Weight:** {{if .Weight}}{{.Weight}} (g){{end}}
 
 **Box size:** {{if .BoxSize}}{{.BoxSize}} (cm){{end}}{{end}}
 {{if .Observations}}
-**Bonus:** {{.Observations}}{{end}}
-`
+**Bonus:** {{.Observations}}{{end}}`
+
 	t := template.Must(template.New("poster").Parse(poster))
 	dir, err := os.Getwd()
 	if err != nil {
