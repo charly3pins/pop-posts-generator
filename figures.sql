@@ -1,6 +1,6 @@
 CREATE TABLE figures (
 id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-`Number` VARCHAR(4),
+`Number` VARCHAR(10),
 `Name` VARCHAR(255),
 `Character`     VARCHAR(255),
 `Category`      VARCHAR(255),
